@@ -53,8 +53,8 @@ class HBNBCommand(cmd.Cmd):
 
     def update_dict(self, classname, uid, s_dict):
         """Helper method for update() with a dictionary."""
-        s = s_dict.replace("'", '"')
-        d = json.loads(s)
+        fns = s_dict.replace("'", '"')
+        fnd = json.loads(fns)
         if not classname:
             print("** class name missing **")
         elif classname not in storage.classes():
@@ -67,7 +67,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
             else:
                 attributes = storage.attributes()[classname]
-                for attribute, value in d.items():
+                for attribute, value in fnd.items():
                     if attribute in attributes:
                         value = attributes[attribute](value)
                     setattr(storage.all()[key], attribute, value)
@@ -163,7 +163,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             matches = [
-                k for k in storage.all() if k.startswith(
+                fnk for fnk in storage.all() if fnk.startswith(
                     words[0] + '.')]
             print(len(matches))
 
@@ -174,7 +174,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        rex = r'^(\S+)(?:\s(\S+)(?:\s(\S+)(?:\s((?:"[^"]*")|(?:(\S)+)))?)?)?'
+        rex = r'^(\S+)(?:\fns(\S+)(?:\fns(\S+)(?:\fns((?:"[^"]*")|(?:(\S)+)))?)?)?'
         match = re.search(rex, line)
         classname = match.group(1)
         uid = match.group(2)

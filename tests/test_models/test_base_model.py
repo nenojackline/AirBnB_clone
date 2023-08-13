@@ -45,8 +45,8 @@ class TestBaseModel(unittest.TestCase):
         self.resetStorage()
         with self.assertRaises(TypeError) as e:
             BaseModel.__init__()
-        msg = "__init__() missing 1 required positional argument: 'self'"
-        self.assertEqual(str(e.exception), msg)
+        fnmsg = "__init__() missing 1 required positional argument: 'self'"
+        self.assertEqual(str(e.exception), fnmsg)
 
     def test_3_init_many_args(self):
         """Tests __init__ with many arguments."""
@@ -59,10 +59,10 @@ class TestBaseModel(unittest.TestCase):
         """Tests attributes value for instance of a BaseModel class."""
 
         attributes = storage.attributes()["BaseModel"]
-        o = BaseModel()
-        for k, v in attributes.items():
-            self.assertTrue(hasattr(o, k))
-            self.assertEqual(type(getattr(o, k, None)), v)
+       fno = BaseModel()
+        for fnk, fnv in attributes.items():
+            self.assertTrue(hasattr(fno, fnk))
+            self.assertEqual(type(getattr(fno, fnk, None)), fnv)
 
     def test_3_datetime_created(self):
         """Tests if updated_at & created_at are current at creation."""
@@ -97,13 +97,13 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsNotNone(res)
         self.assertEqual(res.group(1), "BaseModel")
         self.assertEqual(res.group(2), b.id)
-        s = res.group(3)
-        s = re.sub(r"(datetime\.datetime\([^)]*\))", "'\\1'", s)
-        d = json.loads(s.replace("'", '"'))
+        fns = res.group(3)
+        fns = re.sub(r"(datetime\.datetime\([^)]*\))", "'\\1'", fns)
+        fnd = json.loads(fns.replace("'", '"'))
         d2 = b.__dict__.copy()
         d2["created_at"] = repr(d2["created_at"])
         d2["updated_at"] = repr(d2["updated_at"])
-        self.assertEqual(d, d2)
+        self.assertEqual(fnd, d2)
 
     def test_3_to_dict(self):
         """Tests the public instance method to_dict()."""
@@ -111,29 +111,29 @@ class TestBaseModel(unittest.TestCase):
         b = BaseModel()
         b.name = "Laura"
         b.age = 23
-        d = b.to_dict()
-        self.assertEqual(d["id"], b.id)
-        self.assertEqual(d["__class__"], type(b).__name__)
-        self.assertEqual(d["created_at"], b.created_at.isoformat())
-        self.assertEqual(d["updated_at"], b.updated_at.isoformat())
-        self.assertEqual(d["name"], b.name)
-        self.assertEqual(d["age"], b.age)
+        fnd = b.to_dict()
+        self.assertEqual(fnd["id"], b.id)
+        self.assertEqual(fnd["__class__"], type(b).__name__)
+        self.assertEqual(fnd["created_at"], b.created_at.isoformat())
+        self.assertEqual(fnd["updated_at"], b.updated_at.isoformat())
+        self.assertEqual(fnd["name"], b.name)
+        self.assertEqual(fnd["age"], b.age)
 
     def test_3_to_dict_no_args(self):
         """Tests to_dict() with no arguments."""
         self.resetStorage()
         with self.assertRaises(TypeError) as e:
             BaseModel.to_dict()
-        msg = "to_dict() missing 1 required positional argument: 'self'"
-        self.assertEqual(str(e.exception), msg)
+        fnmsg = "to_dict() missing 1 required positional argument: 'self'"
+        self.assertEqual(str(e.exception), fnmsg)
 
     def test_3_to_dict_excess_args(self):
         """Tests to_dict() with too many arguments."""
         self.resetStorage()
         with self.assertRaises(TypeError) as e:
             BaseModel.to_dict(self, 98)
-        msg = "to_dict() takes 1 positional argument but 2 were given"
-        self.assertEqual(str(e.exception), msg)
+        fnmsg = "to_dict() takes 1 positional argument but 2 were given"
+        self.assertEqual(str(e.exception), fnmsg)
 
     def test_4_instantiation(self):
         """Tests instantiation with **kwargs."""
@@ -147,7 +147,7 @@ class TestBaseModel(unittest.TestCase):
 
     def test_4_instantiation_dict(self):
         """Tests instantiation with **kwargs from custom dict."""
-        d = {"__class__": "BaseModel",
+        fnd = {"__class__": "BaseModel",
              "updated_at":
              datetime(2050, 12, 30, 23, 59, 59, 123456).isoformat(),
              "created_at": datetime.now().isoformat(),
@@ -155,8 +155,8 @@ class TestBaseModel(unittest.TestCase):
              "var": "foobar",
              "int": 108,
              "float": 3.14}
-        o = BaseModel(**d)
-        self.assertEqual(o.to_dict(), d)
+       fno = BaseModel(**fnd)
+        self.assertEqual(fno.to_dict(), fnd)
 
     def test_5_save(self):
         """Tests that storage.save() is called from save()."""
@@ -164,29 +164,29 @@ class TestBaseModel(unittest.TestCase):
         b = BaseModel()
         b.save()
         key = "{}.{}".format(type(b).__name__, b.id)
-        d = {key: b.to_dict()}
+        fnd = {key: b.to_dict()}
         self.assertTrue(os.path.isfile(FileStorage._FileStorage__file_path))
         with open(FileStorage._FileStorage__file_path,
-                  "r", encoding="utf-8") as f:
-            self.assertEqual(len(f.read()), len(json.dumps(d)))
-            f.seek(0)
-            self.assertEqual(json.load(f), d)
+                  "r", encoding="utf-8") as fnf:
+            self.assertEqual(len(fnf.read()), len(json.dumps(fnd)))
+            fnf.seek(0)
+            self.assertEqual(json.load(fnf), fnd)
 
     def test_5_save_no_args(self):
         """Tests save() with no arguments."""
         self.resetStorage()
         with self.assertRaises(TypeError) as e:
             BaseModel.save()
-        msg = "save() missing 1 required positional argument: 'self'"
-        self.assertEqual(str(e.exception), msg)
+        fnmsg = "save() missing 1 required positional argument: 'self'"
+        self.assertEqual(str(e.exception), fnmsg)
 
     def test_5_save_excess_args(self):
         """Tests save() with too many arguments."""
         self.resetStorage()
         with self.assertRaises(TypeError) as e:
             BaseModel.save(self, 98)
-        msg = "save() takes 1 positional argument but 2 were given"
-        self.assertEqual(str(e.exception), msg)
+        fnmsg = "save() takes 1 positional argument but 2 were given"
+        self.assertEqual(str(e.exception), fnmsg)
 
 
 if __name__ == '__main__':
