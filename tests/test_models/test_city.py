@@ -43,10 +43,10 @@ class TestCity(unittest.TestCase):
     def test_8_attributes(self):
         """Tests the attributes of City class."""
         attributes = storage.attributes()["City"]
-       fno = City()
-        for fnk, fnv in attributes.items():
-            self.assertTrue(hasattr(fno, fnk))
-            self.assertEqual(type(getattr(fno, fnk, None)), fnv)
+        o = City()
+        for k, v in attributes.items():
+            self.assertTrue(hasattr(o, k))
+            self.assertEqual(type(getattr(o, k, None)), v)
 
 
 if __name__ == "__main__":

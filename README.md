@@ -8,8 +8,8 @@ create a simple flow of serialization/deserialization: Instance <-> Dictionary <
 create all classes used for AirBnB (User, State, City, Place…) that inherit from BaseModel
 create the first abstracted storage engine of the project: File storage.
 create all unittests to validate all our classes and storage engine
-What’fns a command interpreter?
-Do you remember the Shell? It’fns exactly the same but limited to a specific use-case. In our case, we want to be able to manage the objects of our project:
+What’s a command interpreter?
+Do you remember the Shell? It’s exactly the same but limited to a specific use-case. In our case, we want to be able to manage the objects of our project:
 
 Create a new object (ex: a new User or a new Place)
 Retrieve an object from a file, a database etc…

@@ -22,9 +22,9 @@ class FileStorage:
 
     def save(self):
         """ serializes __objects to the JSON file (path: __file_path)"""
-        with open(FileStorage.__file_path, "w", encoding="utf-8") as fnf:
-            fnd = {fnk: fnv.to_dict() for fnk, fnv in FileStorage.__objects.items()}
-            json.dump(fnd, fnf)
+        with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
+            d = {k: v.to_dict() for k, v in FileStorage.__objects.items()}
+            json.dump(d, f)
 
     def classes(self):
         """Returns a dictionary of valid classes and their references"""
@@ -49,10 +49,10 @@ class FileStorage:
         """Reloads the stored objects"""
         if not os.path.isfile(FileStorage.__file_path):
             return
-        with open(FileStorage.__file_path, "r", encoding="utf-8") as fnf:
-            obj_dict = json.load(fnf)
-            obj_dict = {fnk: self.classes()[fnv["__class__"]](**fnv)
-                        for fnk, fnv in obj_dict.items()}
+        with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
+            obj_dict = json.load(f)
+            obj_dict = {k: self.classes()[v["__class__"]](**v)
+                        for k, v in obj_dict.items()}
             # TODO: should this overwrite or insert?
             FileStorage.__objects = obj_dict
 
