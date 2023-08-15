@@ -35,18 +35,18 @@ class TestReview(unittest.TestCase):
     def test_8_instantiation(self):
         """Tests instantiation of Review class."""
 
-        b = Review()
-        self.assertEqual(str(type(b)), "<class 'models.review.Review'>")
-        self.assertIsInstance(b, Review)
-        self.assertTrue(issubclass(type(b), BaseModel))
+        fnb = Review()
+        self.assertEqual(str(type(fnb)), "<class 'models.review.Review'>")
+        self.assertIsInstance(fnb, Review)
+        self.assertTrue(issubclass(type(fnb), BaseModel))
 
     def test_8_attributes(self):
         """Tests the attributes of Review class."""
         attributes = storage.attributes()["Review"]
-        o = Review()
-        for k, v in attributes.items():
-            self.assertTrue(hasattr(o, k))
-            self.assertEqual(type(getattr(o, k, None)), v)
+        fno = Review()
+        for fnk, fnv in attributes.items():
+            self.assertTrue(hasattr(fno, fnk))
+            self.assertEqual(type(getattr(fno, fnk, None)), fnv)
 
 
 if __name__ == "__main__":

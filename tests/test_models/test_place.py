@@ -35,18 +35,18 @@ class TestPlace(unittest.TestCase):
     def test_8_instantiation(self):
         """Tests instantiation of Place class."""
 
-        b = Place()
-        self.assertEqual(str(type(b)), "<class 'models.place.Place'>")
-        self.assertIsInstance(b, Place)
-        self.assertTrue(issubclass(type(b), BaseModel))
+        fnb = Place()
+        self.assertEqual(str(type(fnb)), "<class 'models.place.Place'>")
+        self.assertIsInstance(fnb, Place)
+        self.assertTrue(issubclass(type(fnb), BaseModel))
 
     def test_8_attributes(self):
         """Tests the attributes of Place class."""
         attributes = storage.attributes()["Place"]
-        o = Place()
-        for k, v in attributes.items():
-            self.assertTrue(hasattr(o, k))
-            self.assertEqual(type(getattr(o, k, None)), v)
+        fno = Place()
+        for fnk, fnv in attributes.items():
+            self.assertTrue(hasattr(fno, fnk))
+            self.assertEqual(type(getattr(fno, fnk, None)), fnv)
 
 
 if __name__ == "__main__":

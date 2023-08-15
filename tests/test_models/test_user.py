@@ -35,18 +35,18 @@ class TestUser(unittest.TestCase):
     def test_8_instantiation(self):
         """Tests instantiation of User class."""
 
-        b = User()
-        self.assertEqual(str(type(b)), "<class 'models.user.User'>")
-        self.assertIsInstance(b, User)
-        self.assertTrue(issubclass(type(b), BaseModel))
+        fnb = User()
+        self.assertEqual(str(type(fnb)), "<class 'models.user.User'>")
+        self.assertIsInstance(fnb, User)
+        self.assertTrue(issubclass(type(fnb), BaseModel))
 
     def test_8_attributes(self):
         """Tests the attributes of User class."""
         attributes = storage.attributes()["User"]
-        o = User()
-        for k, v in attributes.items():
-            self.assertTrue(hasattr(o, k))
-            self.assertEqual(type(getattr(o, k, None)), v)
+        fno = User()
+        for fnk, fnv in attributes.items():
+            self.assertTrue(hasattr(fno, fnk))
+            self.assertEqual(type(getattr(fno, fnk, None)), fnv)
 
 
 if __name__ == "__main__":
